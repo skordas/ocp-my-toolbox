@@ -1,7 +1,7 @@
 #!/bin/bash
 
 break_time=30
-logfile=$(date +%Y%m%d_%k%M%S.log)
+logfile=$(date +%Y%m%d_%H%M%S.log)
 
 function log {
 	echo -e "\n------------------------------------------------------------------------------------------------------------------------------------" | tee -a $logfile
@@ -34,6 +34,10 @@ while :
   # Checking machines
   log "oc get machines -n openshift-machine-api"
   oc get machines -n openshift-machine-api | tee -a $logfile
+
+   # Checking machines config pool
+  log "oc get mcp"
+  oc get mcp | tee -a $logfile
 
   # Checking cluster operators
   log "oc get co"
